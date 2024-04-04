@@ -6,7 +6,7 @@ const port = 3000;
 // Serve static files from the 'public' directory (where your HTML file is located)
 app.use(express.static("public"));
 app.use(express.json()); 
-app.use(cors());
+app.use(cors()); 
 
 let items = []; // PERFORMING CURD OPERATIONS HERE
 

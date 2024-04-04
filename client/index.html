@@ -7,7 +7,7 @@
     <title>WEB API</title>
   </head>
   <body>
-    <div class="webapi">
+    <div class="webapi displayNone">
       <h1>WEB API</h1>
       <input type="text" id="cityName" placeholder="Enter City Name" />
       <button id="getWeather">SUBMIT</button>
@@ -25,7 +25,9 @@
         />
         <button id="addItem" class="btn btn-add">Add Item</button>
       </div>
+
       <button id="getItems" class="btn btn-get">Get Items</button>
+
       <div class="input-group">
         <input
           type="text"
@@ -41,6 +43,7 @@
         />
         <button id="updateItem" class="btn btn-update">Update Item</button>
       </div>
+
       <div class="input-group">
         <input
           type="text"
@@ -49,7 +52,8 @@
           placeholder="Content of Item to Delete"
         />
         <button id="deleteItem" class="btn btn-delete">Delete Item</button>
-    </div>
+      </div>
+
       <div id="apiResult" class="api-result"></div>
     </div>
 

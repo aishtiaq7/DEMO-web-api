@@ -5,71 +5,68 @@ document.getElementById("getWeather").addEventListener("click", function () {
     return;
   }
 
-    // TESTING PUBLIC FREE API
-    console.log("city - > ", city);
-    const url = `https://restcountries.com/v3.1/name/${city}`;
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error calling API");
-        }
-        return response.json();
-      })
+  // // TESTING PUBLIC FREE API
+  console.log("city - > ", city);
+  const url = `https://restcountries.com/v3.1/name/${city}`;
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error calling API");
+      }
+      return response.json();
+    })
 
-      .then((data) => {
-        const display = `
+    .then((data) => {
+      const display = `
                     <h2>Name: ${data[0].name.common}</h2>
                     <p>Region: ${data[0].region}</p>
                     <p>FLAG: ${data[0].flag}</p>
                 `;
-        document.getElementById("weatherResult").innerHTML = display;
-        document.getElementById("cityName").value = "";
-        return data;
-      })
-      .then((info) => {
-        console.log("info:", info);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        document.getElementById(
-          "weatherResult"
-        ).innerHTML = `<p>${error.message}</p>`;
-      });
+      document.getElementById("weatherResult").innerHTML = display;
+      document.getElementById("cityName").value = "";
+      return data;
+    })
+    .then((info) => {
+      console.log("info:", info);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      document.getElementById(
+        "weatherResult"
+      ).innerHTML = `<p>${error.message}</p>`;
+    });
 
-  //  ON LOCAL SERVER
-  //   const url = `http://localhost:3000/getEndPoint`;
-  //   fetch(url)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Weather data not found.");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const display = `<h2>Weather Details</h2>
-  //                          <p>Temperature: ${data.temperature}°C</p>
-  //                          <p>Humidity: ${data.humidity}%</p>`;
-  //       document.getElementById("weatherResult").innerHTML = display;
-  //       document.getElementById("cityName").value = "";
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //       document.getElementById(
-  //         "weatherResult"
-  //       ).innerHTML = `<p>${error.message}</p>`;
-  //     });
+  // //  ON LOCAL SERVER
+  // const url = `http://localhost:3000/getEndPoint`;
+  // fetch(url)
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error("Weather data not found.");
+  //     }
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     const display = `<h2>Weather Details</h2>
+  //                        <p>Temperature: ${data.temperature}°C</p>
+  //                        <p>Humidity: ${data.humidity}%</p>`;
+  //     document.getElementById("weatherResult").innerHTML = display;
+  //     document.getElementById("cityName").value = "";
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error:", error);
+  //     document.getElementById(
+  //       "weatherResult"
+  //     ).innerHTML = `<p>${error.message}</p>`;
+  //   });
 });
-
-
-
 
 document.getElementById("addItem").addEventListener("click", function () {
   const itemContent = document.getElementById("itemContent").value;
-  console.log('itemContent:',itemContent);
+  console.log("itemContent:", itemContent);
   fetch("http://localhost:3000/addItem", {
     method: "POST",
     body: JSON.stringify({
-       item:itemContent,
+      item: itemContent,
     }),
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -77,14 +74,11 @@ document.getElementById("addItem").addEventListener("click", function () {
   })
     .then((response) => response.json())
     .then((data) => {
-    console.log('getting back in client side: ', data);
+      console.log("getting back in client side: ", data);
       document.getElementById("apiResult").innerHTML = JSON.stringify(data);
     })
     .catch((error) => console.error("Error:", error));
 });
-
-
-
 
 document.getElementById("getItems").addEventListener("click", function () {
   fetch("http://localhost:3000/items")
@@ -96,43 +90,46 @@ document.getElementById("getItems").addEventListener("click", function () {
 });
 
 document.getElementById("updateItem").addEventListener("click", function () {
-    const originalContent = document.getElementById("originalItemContent").value;
-    const newContent = document.getElementById("newItemContent").value;
-    fetch(`http://localhost:3000/updateItem`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ originalContent: originalContent, newContent: newContent }),
+  const originalContent = document.getElementById("originalItemContent").value;
+  const newContent = document.getElementById("newItemContent").value;
+  fetch(`http://localhost:3000/updateItem`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      originalContent: originalContent,
+      newContent: newContent,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("apiResult").innerHTML = JSON.stringify(data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        document.getElementById("apiResult").innerHTML = JSON.stringify(data);
-      })
-      .catch((error) => console.error("Error:", error));
-  });
-
-  document.getElementById("deleteItem").addEventListener("click", function () {
-    const contentToDelete = document.getElementById("itemContentToDelete").value;
-    fetch("http://localhost:3000/deleteItem", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: contentToDelete }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(err => Promise.reject(err));
-        }
-        return response.json();
-    })
-    .then(data => {
-        document.getElementById("apiResult").innerHTML = data.message;
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        document.getElementById("apiResult").innerHTML = error.error || "An error occurred";
-    });
+    .catch((error) => console.error("Error:", error));
 });
 
+document.getElementById("deleteItem").addEventListener("click", function () {
+  const contentToDelete = document.getElementById("itemContentToDelete").value;
+  fetch("http://localhost:3000/deleteItem", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ content: contentToDelete }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => Promise.reject(err));
+      }
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("apiResult").innerHTML = data.message;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      document.getElementById("apiResult").innerHTML =
+        error.error || "An error occurred";
+    });
+});
