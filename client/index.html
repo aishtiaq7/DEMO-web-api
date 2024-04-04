@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>WEB API</title>
 </head>
 <body>
@@ -10,6 +11,21 @@
     <input type="text" id="cityName" placeholder="Enter City Name">
     <button id="getWeather">SUBMIT</button>
     <div id="weatherResult"></div>
+
+
+
+    <div class="localAPI">
+        <h2>LOCAL API TESTING</h2>
+        <input type="text" id="itemContent" placeholder="Enter Item Content">
+        <button id="addItem">Add Item</button>
+        <button id="getItems">Get Items</button>
+        <input type="number" id="updateItemId" placeholder="Item ID">
+        <input type="text" id="updateItemContent" placeholder="New Content">
+        <button id="updateItem">Update Item</button>
+        <input type="number" id="deleteItemId" placeholder="Item ID to Delete">
+        <button id="deleteItem">Delete Item</button>
+        <div id="apiResult"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
