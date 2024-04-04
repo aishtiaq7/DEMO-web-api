@@ -5,36 +5,36 @@ document.getElementById("getWeather").addEventListener("click", function () {
     return;
   }
 
-  //   TESTING PUBLIC FREE API
-  //   console.log("city - > ", city);
-  //   const url = `https://restcountries.com/v3.1/name/${city}`;
-  //   fetch(url)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Error calling API");
-  //       }
-  //       return response.json();
-  //     })
+    // TESTING PUBLIC FREE API
+    console.log("city - > ", city);
+    const url = `https://restcountries.com/v3.1/name/${city}`;
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error calling API");
+        }
+        return response.json();
+      })
 
-  //     .then((data) => {
-  //       const display = `
-  //                   <h2>Name: ${data[0].name.common}</h2>
-  //                   <p>Region: ${data[0].region}</p>
-  //                   <p>FLAG: ${data[0].flag}</p>
-  //               `;
-  //       document.getElementById("weatherResult").innerHTML = display;
-  //       document.getElementById("cityName").value = "";
-  //       return data;
-  //     })
-  //     .then((info) => {
-  //       console.log("info:", info);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //       document.getElementById(
-  //         "weatherResult"
-  //       ).innerHTML = `<p>${error.message}</p>`;
-  //     });
+      .then((data) => {
+        const display = `
+                    <h2>Name: ${data[0].name.common}</h2>
+                    <p>Region: ${data[0].region}</p>
+                    <p>FLAG: ${data[0].flag}</p>
+                `;
+        document.getElementById("weatherResult").innerHTML = display;
+        document.getElementById("cityName").value = "";
+        return data;
+      })
+      .then((info) => {
+        console.log("info:", info);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        document.getElementById(
+          "weatherResult"
+        ).innerHTML = `<p>${error.message}</p>`;
+      });
 
   //  ON LOCAL SERVER
   //   const url = `http://localhost:3000/getEndPoint`;
@@ -60,6 +60,9 @@ document.getElementById("getWeather").addEventListener("click", function () {
   //     });
 });
 
+
+
+
 document.getElementById("addItem").addEventListener("click", function () {
   const itemContent = document.getElementById("itemContent").value;
   console.log('itemContent:',itemContent);
@@ -79,6 +82,9 @@ document.getElementById("addItem").addEventListener("click", function () {
     })
     .catch((error) => console.error("Error:", error));
 });
+
+
+
 
 document.getElementById("getItems").addEventListener("click", function () {
   fetch("http://localhost:3000/items")

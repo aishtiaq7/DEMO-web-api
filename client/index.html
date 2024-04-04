@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>WEB API</title>
-</head>
-<body>
-    <h1>WEB API</h1>
-    <input type="text" id="cityName" placeholder="Enter City Name">
-    <button id="getWeather">SUBMIT</button>
-    <div id="weatherResult"></div>
-
-
+  </head>
+  <body>
+    <div class="webapi">
+      <h1>WEB API</h1>
+      <input type="text" id="cityName" placeholder="Enter City Name" />
+      <button id="getWeather">SUBMIT</button>
+      <div id="weatherResult"></div>
+    </div>
 
     <div class="localAPI">
-        <h2>LOCAL API TESTING</h2>
-        <input type="text" id="itemContent" placeholder="Enter Item Content">
-        <button id="addItem">Add Item</button>
-        <button id="getItems">Get Items</button>
-        <input type="number" id="updateItemId" placeholder="Item ID">
-        <input type="text" id="updateItemContent" placeholder="New Content">
-        <button id="updateItem">Update Item</button>
-        <input type="number" id="deleteItemId" placeholder="Item ID to Delete">
-        <button id="deleteItem">Delete Item</button>
-        <div id="apiResult"></div>
+      <h2>LOCAL API TESTING</h2>
+      <div class="input-group">
+        <input
+          type="text"
+          id="itemContent"
+          class="input-field"
+          placeholder="Enter Item Content"
+        />
+        <button id="addItem" class="btn btn-add">Add Item</button>
+      </div>
+      <button id="getItems" class="btn btn-get">Get Items</button>
+      <div class="input-group">
+        <input
+          type="number"
+          id="updateItemId"
+          class="input-field"
+          placeholder="Item ID"
+        />
+        <input
+          type="text"
+          id="updateItemContent"
+          class="input-field"
+          placeholder="New Content"
+        />
+        <button id="updateItem" class="btn btn-update">Update Item</button>
+      </div>
+      <div class="input-group">
+        <input
+          type="number"
+          id="deleteItemId"
+          class="input-field"
+          placeholder="Item ID to Delete"
+        />
+        <button id="deleteItem" class="btn btn-delete">Delete Item</button>
+      </div>
+      <div id="apiResult" class="api-result"></div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
