@@ -5,6 +5,8 @@ document.getElementById("getWeather").addEventListener("click", function () {
     return;
   }
 
+
+//   TESTING PUBLIC FREE API 
   console.log("city - > ", city);
   const url = `https://restcountries.com/v3.1/name/${city}`;
   fetch(url)
@@ -20,7 +22,6 @@ document.getElementById("getWeather").addEventListener("click", function () {
                   <h2>Name: ${data[0].name.common}</h2>
                   <p>Region: ${data[0].region}</p>
                   <p>FLAG: ${data[0].flag}</p>
-
               `;
       document.getElementById("weatherResult").innerHTML = display;
       document.getElementById("cityName").value = "";
@@ -37,7 +38,6 @@ document.getElementById("getWeather").addEventListener("click", function () {
     });
 
 
-    
 
   //  ON LOCAL SERVER
   //   const url = `http://localhost:3000/getEndPoint`;
