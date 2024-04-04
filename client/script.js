@@ -96,21 +96,21 @@ document.getElementById("getItems").addEventListener("click", function () {
 });
 
 document.getElementById("updateItem").addEventListener("click", function () {
-  const id = document.getElementById("updateItemId").value;
-  const content = document.getElementById("updateItemContent").value;
-  fetch(`http://localhost:3000/updateItem/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ content: content }), // Adjust according to your item structure
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById("apiResult").innerHTML = JSON.stringify(data);
+    const originalContent = document.getElementById("originalItemContent").value;
+    const newContent = document.getElementById("newItemContent").value;
+    fetch(`http://localhost:3000/updateItem`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ originalContent: originalContent, newContent: newContent }),
     })
-    .catch((error) => console.error("Error:", error));
-});
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("apiResult").innerHTML = JSON.stringify(data);
+      })
+      .catch((error) => console.error("Error:", error));
+  });
 
 document.getElementById("deleteItem").addEventListener("click", function () {
   const id = document.getElementById("deleteItemId").value;

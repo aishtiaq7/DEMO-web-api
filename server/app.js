@@ -49,20 +49,19 @@ app.delete("/deleteItem/:id", (req, res) => {
   }
 });
 
-app.put("/updateItem/:id", (req, res) => {
-  const { id } = req.params; // Get the item ID from the URL
-  const updatedItem = req.body; // Get the updated item from the request body
-
-  const index = items.findIndex((item) => item.id == id); // Find the index of the item with the given ID
-  if (index !== -1) {
-    updatedItem.id = Number(id); // Ensure the ID is a number
-    items[index] = updatedItem; // Update the item
+app.put("/updateItem", (req, res) => {
+    const { originalContent, newContent } = req.body;
     console.log("items:", items);
-
-    res.status(200).json(updatedItem);
-  } else {
-    res.status(404).send("Item not found");
-  }
+    console.log('now finding', originalContent);
+    const index = items.findIndex(item => item === originalContent);
+    if (index !== -1) {
+        console.log("found!");
+        items[index] = newContent; // Update the item's content
+        res.status(200).json({ message: "Item updated successfully", item: items[index] });
+    } else {
+        console.log("NOT found!");
+        res.status(404).json({ error: "Item not found" }); // Ensure JSON format
+    }
 });
 
 app.listen(port, () => {
