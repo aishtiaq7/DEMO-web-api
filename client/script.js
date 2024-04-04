@@ -112,14 +112,27 @@ document.getElementById("updateItem").addEventListener("click", function () {
       .catch((error) => console.error("Error:", error));
   });
 
-document.getElementById("deleteItem").addEventListener("click", function () {
-  const id = document.getElementById("deleteItemId").value;
-  fetch(`http://localhost:3000/deleteItem/${id}`, {
-    method: "DELETE",
-  })
-    .then(() => {
-      document.getElementById("apiResult").innerHTML =
-        "Item deleted successfully";
+  document.getElementById("deleteItem").addEventListener("click", function () {
+    const contentToDelete = document.getElementById("itemContentToDelete").value;
+    fetch("http://localhost:3000/deleteItem", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: contentToDelete }),
     })
-    .catch((error) => console.error("Error:", error));
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => Promise.reject(err));
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById("apiResult").innerHTML = data.message;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("apiResult").innerHTML = error.error || "An error occurred";
+    });
 });
+

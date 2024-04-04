@@ -5,10 +5,10 @@ const port = 3000;
 
 // Serve static files from the 'public' directory (where your HTML file is located)
 app.use(express.static("public"));
-app.use(express.json()); // Make sure this line is before your routes
+app.use(express.json()); 
 app.use(cors());
 
-let items = []; // This will store our items
+let items = []; // PERFORMING CURD OPERATIONS HERE
 
 app.get("/getEndPoint", async (req, res) => {
   // Generate random data
@@ -25,6 +25,8 @@ app.get("/getEndPoint", async (req, res) => {
   res.status(200).json(dummyData);
 });
 
+
+// TESTING OUT CURD functions: 
 app.get("/items", (req, res) => {
   res.status(200).json(items); // Send all items as JSON
 });
@@ -35,18 +37,6 @@ app.post("/addItem", (req, res) => {
     items.push(item);
     console.log("items:", items);
     res.status(201).json({ message: "Item added successfully", item });
-});
-
-app.delete("/deleteItem/:id", (req, res) => {
-  const { id } = req.params; // Get the item ID from the URL
-  const index = items.findIndex((item) => item.id == id); // Find the index of the item with the given ID
-  if (index !== -1) {
-    items = items.filter((item) => item.id != id); // Remove the item from the array
-    console.log("items:", items);
-    res.status(204).send(); // No content to send back
-  } else {
-    res.status(404).send("Item not found");
-  }
 });
 
 app.put("/updateItem", (req, res) => {
@@ -61,6 +51,20 @@ app.put("/updateItem", (req, res) => {
     } else {
         console.log("NOT found!");
         res.status(404).json({ error: "Item not found" }); // Ensure JSON format
+    }
+});
+
+app.delete("/deleteItem", (req, res) => {
+    const { content } = req.body; // Assuming you send content to delete in the body
+    const index = items.findIndex(item => item === content); // Find the item by content
+    if (index !== -1) {
+        console.log("Item to delete found:", items[index]);
+        items.splice(index, 1); // Remove the item from the array
+        console.log("Updated items array:", items);
+        res.status(200).json({ message: "Item deleted successfully" });
+    } else {
+        console.log("Item not found!");
+        res.status(404).json({ error: "Item not found" });
     }
 });
 
